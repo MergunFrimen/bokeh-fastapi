@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
 const App = () => {
-  const [pdbId, setPdbId] = useState("");
+  const [pdbId, setPdbId] = useState("1tqn");
   const plotUrl = useMemo(() => {
     return `http://localhost:8000/calculate_ramachandran/${pdbId}`;
   }, [pdbId]);
@@ -9,7 +9,8 @@ const App = () => {
   const fetchPlot = async () => {
     const response = await fetch(plotUrl);
     const data = await response.json();
-    Bokeh.embed.embed_item(data, "myplot"); // Use the 'Bokeh' library to embed the item
+    document.getElementById("myplot").innerHTML = "";
+    Bokeh.embed.embed_item(data, "myplot");
   };
 
   return (
